@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
@@ -6,9 +9,8 @@ const app = express();
 app.set("view engine", "ejs");
 
 // Database
-const connectionString =
-  "mongodb+srv://yoda:0xpgz1ix@cluster0.vqajd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
+const connectionString = `mongodb+srv://yoda:${process.env.password}@cluster0.vqajd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+console.log(connectionString);
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then((client) => {
     console.log("Connected to Database");
