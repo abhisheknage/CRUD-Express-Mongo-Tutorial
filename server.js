@@ -9,7 +9,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 // Database
-const connectionString = `mongodb+srv://yoda:${process.env.password}@cluster0.vqajd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const connectionString = process.env.connectionString;
 console.log(connectionString);
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then((client) => {
