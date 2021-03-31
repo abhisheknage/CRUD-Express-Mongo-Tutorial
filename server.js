@@ -17,10 +17,22 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     const db = client.db("star-wars-quotes");
     const quotesCollection = db.collection("quotes");
     // Middleware
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
     app.use(express.static("public"));
     app.get("/", (req, res) => {
+      console.log(req);
+      //   res.send("Hello World!");
+      db.collection("quotes")
+        .find()
+        .toArray()
+        .then((results) => res.render("index.ejs", { quotes: results }));
+      // console.log(cursor);
+      // res.render("index.ejs", {});
+      // res.sendFile(__dirname + "/index.html");
+    });
+    app.get("/:id", (req, res) => {
+      console.log(req);
       //   res.send("Hello World!");
       db.collection("quotes")
         .find()
